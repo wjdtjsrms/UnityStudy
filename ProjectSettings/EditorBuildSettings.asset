@@ -6,9 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_UnityStudy/15_WorldCanvasInputField/WorldCanvsInputField.unity
-    guid: cd2d5272d6e59524aa5317280555713e
+    path: Assets/_UnityStudy/17_AR/ARStudy.unity
+    guid: 018ea5a11b3a17543b5e93dafdd780d9
   m_configObjects:
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 880a24beb6bfeb143bd248a23aafb19a, type: 2}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 93d7af57caae21d469e45c3400b6a64d, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: b90cd45696975184db8a1f3f7d6f88c8, type: 2}
   m_UseUCBPForAssetBundles: 0
