@@ -27,3 +27,33 @@ MonoBehaviour:
     m_SpecifySize: 1
     m_Name: Logo
     m_Texture: {fileID: 2800000, guid: d5a8e8cab8affe2449bd22da0b5b1a63, type: 3}
+  - m_SerializedGuid:
+      m_GuidLow: 5072976475505817100
+      m_GuidHigh: 447391120802177950
+    m_SerializedTextureGuid:
+      m_GuidLow: 10026172882744655749
+      m_GuidHigh: 1925045950704656665
+    m_Size: {x: 0.08, y: 0.08}
+    m_SpecifySize: 1
+    m_Name: ImageTargetA
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5223298919411115874
+      m_GuidHigh: 1842218678686169764
+    m_SerializedTextureGuid:
+      m_GuidLow: 5810949647856424749
+      m_GuidHigh: 5970466356306621771
+    m_Size: {x: 0.08, y: 0.08}
+    m_SpecifySize: 1
+    m_Name: ImageTargetB
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5373881756128250581
+      m_GuidHigh: 17539228829827676810
+    m_SerializedTextureGuid:
+      m_GuidLow: 9332757623272871221
+      m_GuidHigh: 9447956763380623131
+    m_Size: {x: 0.08, y: 0.08}
+    m_SpecifySize: 1
+    m_Name: ImageTargetC
+    m_Texture: {fileID: 0}

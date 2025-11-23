@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 903783376}
   - component: {fileID: 903783375}
   - component: {fileID: 903783378}
+  - component: {fileID: 903783379}
   m_Layer: 0
   m_Name: XR Origin (Mobile AR)
   m_TagString: Untagged
@@ -181,7 +182,7 @@ Transform:
   m_GameObject: {fileID: 903783368}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3163325, y: -0.9028303, z: 9.587436}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -269,7 +270,21 @@ MonoBehaviour:
       m_Calls: []
   m_SerializedLibrary: {fileID: 11400000, guid: 3b03f60b2da12a549aeea35deeace6c5, type: 2}
   m_MaxNumberOfMovingImages: 1
-  m_TrackedImagePrefab: {fileID: 8044746058793364514, guid: 9dacd304d0b28504a872f111550228c0, type: 3}
+  m_TrackedImagePrefab: {fileID: 1016616560689369108, guid: 9bf9b612975099d4fb11307172eedcf0, type: 3}
+--- !u!114 &903783379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903783368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 809fe8328b888244f992e84f7cb909e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ImageTrackingTester
+  trackingMat: {fileID: 2100000, guid: 11d655cf67eff7e4ea7c4b0d9d90e226, type: 2}
+  limitedMat: {fileID: 2100000, guid: 63c6cd4c5c00a8042b25a822720d4a16, type: 2}
 --- !u!1 &1099460384
 GameObject:
   m_ObjectHideFlags: 0
