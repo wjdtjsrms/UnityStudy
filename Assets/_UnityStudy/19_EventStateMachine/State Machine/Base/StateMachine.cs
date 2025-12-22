@@ -1,6 +1,5 @@
 using Cysharp.Threading.Tasks;
 using System;
-using System.Collections.Generic;
 using System.Threading;
 
 namespace Anipen.Devmodule
@@ -13,7 +12,6 @@ namespace Anipen.Devmodule
         CancellationTokenSource stateCancellationTokenSource = null;
 
         public IState CurrentState { get; private set; } = null;
-        private readonly Stack<IState> stateHistory = new Stack<IState>();
 
         public void Dispose()
         {
@@ -57,7 +55,8 @@ namespace Anipen.Devmodule
             {
                 if (CurrentState.TryTransition(out var nextState))
                 {
-                    UnlinkCurrentState();
+                    CurrentState.Exit();
+                    CurrentState.DisableLinks();
 
                     ChangeState(nextState);
                     CurrentState.EnableLinks();
@@ -67,15 +66,7 @@ namespace Anipen.Devmodule
         #endregion
 
         #region Control State
-        void UnlinkCurrentState()
-        {
-            if (CurrentState != null)
-            {
-                CurrentState.Exit();
-                CurrentState.DisableLinks();
-            }
-        }
-        void ChangeState(IState nextState, bool recordHistory = false)
+        void ChangeState(IState nextState)
         {
             if (nextState == null)
                 throw new ArgumentNullException(nameof(nextState));
@@ -83,29 +74,9 @@ namespace Anipen.Devmodule
             if (CurrentState != null && isStateActive)
                 CancelCurrentState();
 
-            if (recordHistory)
-                stateHistory.Push(CurrentState);
-
             CurrentState = nextState;
-            CurrentState.EnableLinks();
+
             ExecuteStateAsync().Forget();
-        }
-
-        public void MoveState(IState state) => ChangeState(state, recordHistory: true);
-
-        public void MoveBackState()
-        {
-            if (stateHistory.Count > 0)
-            {
-                IState previousState = stateHistory.Pop();
-                if (CurrentState != null && isStateActive)
-                    CancelCurrentState();
-
-                UnlinkCurrentState();
-                CurrentState = previousState;
-                CurrentState.EnableLinks();
-                ExecuteStateAsync().Forget();
-            }
         }
 
         async UniTask ExecuteStateAsync()
