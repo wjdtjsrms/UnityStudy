@@ -6,106 +6,102 @@ namespace Anipen.Devmodule
 {
     public class StateMachine : IDisposable
     {
-        bool isStateActive = false;
-        bool isMachineRunning = false;
+        private bool isMachineRunning = false;
 
-        CancellationTokenSource stateCancellationTokenSource = null;
+        private CancellationTokenSource currentStateCTS = null;
+
+        private IState pendingForcedState = null;
 
         public IState CurrentState { get; private set; } = null;
 
-        public void Dispose()
-        {
-            StopStateMachine();
-        }
+        public void Dispose() => StopStateMachine();
 
-        #region Control State Machine
+        #region Public Methods
         public void StartStateMachine(IState initialState)
         {
-            if (isMachineRunning) return;
+            if (isMachineRunning || initialState == null) return;
 
-            ChangeState(initialState);
-            StartTransitionLoopAsync().Forget();
+            isMachineRunning = true;
+            CurrentState = initialState;
+
+            RunStateMachineLoop().Forget();
         }
 
         public void StopStateMachine()
         {
             if (!isMachineRunning) return;
 
-            if (CurrentState != null && isStateActive)
-                CancelCurrentState();
-
             isMachineRunning = false;
-            CurrentState = null;
+
+            CancelCurrentState();
         }
 
-        async UniTask StartTransitionLoopAsync()
+        public void ForceChangeState(IState urgentState)
         {
-            isMachineRunning = true;
+            if (!isMachineRunning) return;
 
-            while (isMachineRunning)
-            {
-                CheckForValidTransitions();
-                await UniTask.Yield(PlayerLoopTiming.LastUpdate);
-            }
-        }
+            pendingForcedState = urgentState;
 
-        void CheckForValidTransitions()
-        {
-            if (CurrentState != null && !isStateActive)
-            {
-                if (CurrentState.TryTransition(out var nextState))
-                {
-                    CurrentState.Exit();
-                    CurrentState.DisableLinks();
-
-                    ChangeState(nextState);
-                    CurrentState.EnableLinks();
-                }
-            }
+            CancelCurrentState();
         }
         #endregion
 
-        #region Control State
-        void ChangeState(IState nextState)
+        #region Core Loop
+        private async UniTaskVoid RunStateMachineLoop()
         {
-            if (nextState == null)
-                throw new ArgumentNullException(nameof(nextState));
-
-            if (CurrentState != null && isStateActive)
-                CancelCurrentState();
-
-            CurrentState = nextState;
-
-            ExecuteStateAsync().Forget();
+            while (isMachineRunning && CurrentState != null)
+            {
+                bool isCancelled = await ExcuteCurrentState();
+                MoveNextState(isCancelled);
+            }    
         }
 
-        async UniTask ExecuteStateAsync()
+        private async UniTask<bool> ExcuteCurrentState()
         {
-            if (isStateActive) return;
-
-            isStateActive = true;
-            stateCancellationTokenSource = new CancellationTokenSource();
-
+            CurrentState.EnableLinks();
             CurrentState.Enter();
 
-            await UniTask.WaitUntil(() => CurrentState.Execute(), PlayerLoopTiming.Update, stateCancellationTokenSource.Token)
-                .SuppressCancellationThrow();
+            currentStateCTS = new CancellationTokenSource();
+            bool isCancelled = false;
 
-            isStateActive = false;
+            isCancelled = await UniTask.WaitUntil(() => CurrentState.Execute(), PlayerLoopTiming.Update, currentStateCTS.Token).SuppressCancellationThrow();
+
+            if (!isCancelled)
+                isCancelled = await UniTask.WaitUntil(() => CurrentState.TryTransition(out _), PlayerLoopTiming.Update, currentStateCTS.Token).SuppressCancellationThrow();
+
+            return isCancelled;
         }
 
-        void CancelCurrentState()
+        private void MoveNextState(bool isCancelled)
         {
-            if (stateCancellationTokenSource != null)
+            IState nextState = null;
+
+            if (pendingForcedState != null)
             {
-                stateCancellationTokenSource.Cancel();
-                stateCancellationTokenSource.Dispose();
-                stateCancellationTokenSource = null;
+                nextState = pendingForcedState;
+                pendingForcedState = null;
+            }
+            else if (!isCancelled)
+            {
+                if (CurrentState.TryTransition(out var linkedState))
+                    nextState = linkedState;
             }
 
             CurrentState.Exit();
+            CurrentState.DisableLinks();
 
-            isStateActive = false;
+            CurrentState = nextState;
+        }
+        #endregion
+
+        #region Control State Machine
+        private void CancelCurrentState()
+        {
+            if (currentStateCTS == null) return;
+
+            currentStateCTS.Cancel();
+            currentStateCTS.Dispose();
+            currentStateCTS = null;
         }
         #endregion
     }

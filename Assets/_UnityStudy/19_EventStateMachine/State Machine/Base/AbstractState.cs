@@ -5,7 +5,7 @@ namespace Anipen.Devmodule
 
     public abstract class AbstractState : IState
     {
-        readonly List<ILink> links = new();
+        private readonly List<ILink> links = new();
 
         public virtual string Name { get; set; }
         public bool DebugEnabled { get; set; } = false;
