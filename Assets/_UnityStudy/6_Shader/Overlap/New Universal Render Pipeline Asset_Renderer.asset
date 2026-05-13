@@ -1,5 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8220293524075681500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06a0ba103eef07549acb3bcee29799ea, type: 3}
+  m_Name: CaptureRendererFeature
+  m_EditorClassIdentifier: Assembly-CSharp::CaptureRendererFeature
+  m_Active: 1
+  settings:
+    downsampleFactor: 2
 --- !u!114 &-6283087334397714609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,9 +183,12 @@ MonoBehaviour:
   - {fileID: -6283087334397714609}
   - {fileID: -691383119335159565}
   - {fileID: -995606403735180651}
-  m_RendererFeatureMap: 9846ab1e764dc8fd4fdf77cc5bfdcda8f3885350b7b667f695aa423140e52ef2
+  - {fileID: -8220293524075681500}
+  - {fileID: 3954099255499655413}
+  - {fileID: 3899952621912451620}
+  m_RendererFeatureMap: 9846ab1e764dc8fd4fdf77cc5bfdcda8f3885350b7b667f695aa423140e52ef2246906c497a6eb8df588b1ba52c8df3624eaf12d3f6a1f36
   m_UseNativeRenderPass: 0
-  xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
+  xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   m_AssetVersion: 3
   m_PrepassLayerMask:
@@ -196,4 +214,37 @@ MonoBehaviour:
   m_DepthAttachmentFormat: 0
   m_DepthTextureFormat: 0
   m_AccurateGbufferNormals: 0
-  m_IntermediateTextureMode: 1
+  m_IntermediateTextureMode: 0
+--- !u!114 &3899952621912451620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 682e88ee4737a1f42a45191c9bdb399d, type: 3}
+  m_Name: BlurRendererFeature
+  m_EditorClassIdentifier: Assembly-CSharp::BlurRendererFeature
+  m_Active: 1
+  settings:
+    shader: {fileID: 4800000, guid: c6f0e8df13a520f4bb2bbd0fd93548c5, type: 3}
+    iterations: 3
+    offset: 1
+--- !u!114 &3954099255499655413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4527727647c5847448b279d3e488f16f, type: 3}
+  m_Name: DownSampleGlobalRenderFeature
+  m_EditorClassIdentifier: Assembly-CSharp::DownSampleGlobalRenderFeature
+  m_Active: 1
+  settings:
+    blitMaterial: {fileID: 2100000, guid: 339cd97a2d831bd4fbb360e4892ff770, type: 2}
+    downsample: 1
