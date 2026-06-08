@@ -845,7 +845,7 @@ PlayerSettings:
   webGLDebugSymbols: 0
   webGLEmscriptenArgs: 
   webGLModulesDirectory: 
-  webGLTemplate: APPLICATION:Default
+  webGLTemplate: PROJECT:iTracker
   webGLAnalyzeBuildSize: 0
   webGLUseEmbeddedResources: 0
   webGLCompressionFormat: 1
@@ -868,7 +868,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     Android: FUSION_WEAVER;FUSION2
     Standalone: FUSION_WEAVER;FUSION2
-    WebGL: FUSION_WEAVER;FUSION2
+    WebGL: FUSION_WEAVER;FUSION2;IMAGINE_URP
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

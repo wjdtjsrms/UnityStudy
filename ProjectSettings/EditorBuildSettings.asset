@@ -6,10 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_UnityStudy/18_AndroidPermission/AndroidPermission.unity
-    guid: be4205363a777374db35b39cd4e5e202
+    path: Assets/Imagine/ImageTracker/Demos/Scenes/Demo-Main.unity
+    guid: 640ba54b742624e088e49652c9c522f2
+  - enabled: 1
+    path: Assets/Imagine/ImageTracker/Demos/Scenes/Demo-3DAnim.unity
+    guid: 6cc2b173b9af34cd7978053738087cde
+  - enabled: 1
+    path: Assets/Imagine/ImageTracker/Demos/Scenes/Demo-Basic.unity
+    guid: b5fd66145e8eba8429e5c6c0c7b8bd76
+  - enabled: 1
+    path: Assets/Imagine/ImageTracker/Demos/Scenes/Demo-Video.unity
+    guid: 6cca40fbfd1a74e16b59ea8889afdbc3
+  - enabled: 1
+    path: Assets/Imagine/ImageTracker/Demos/Scenes/Demo-TextureExtraction.unity
+    guid: ae5db75e95bcd46dfb3050d474fc68dd
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 880a24beb6bfeb143bd248a23aafb19a, type: 2}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 93d7af57caae21d469e45c3400b6a64d, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: b90cd45696975184db8a1f3f7d6f88c8, type: 2}
-  m_UseUCBPForAssetBundles: 0
