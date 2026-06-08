@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bed2dc1579e5b4b009484de221f672b8
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 248561
+  packageName: Imagine WebAR - World Tracker
+  packageVersion: 1.5.1
+  assetPath: Assets/WebGLTemplates/wTracker/wtracker.js
+  uploadId: 709356
