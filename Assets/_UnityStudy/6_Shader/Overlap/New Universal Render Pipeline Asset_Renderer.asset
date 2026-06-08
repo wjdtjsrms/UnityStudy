@@ -229,9 +229,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlurRendererFeature
   m_Active: 1
   settings:
-    shader: {fileID: 4800000, guid: c6f0e8df13a520f4bb2bbd0fd93548c5, type: 3}
-    iterations: 3
-    offset: 1
+    blurMaterial: {fileID: 2100000, guid: a01f26300f5a0ac478108e4463416836, type: 2}
+    iterations: 5
+    downsample: 4
 --- !u!114 &3954099255499655413
 MonoBehaviour:
   m_ObjectHideFlags: 0
